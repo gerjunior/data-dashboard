@@ -1,7 +1,7 @@
 import { v4 as uuidV4 } from 'uuid'
 import { Box, Card } from '@mui/material'
 import { DataGrid, type GridColDef, GridToolbar } from '@mui/x-data-grid';
-import { useForecast } from '../../hooks/useForecast.tsx';
+import { useForecast } from './useForecast.tsx';
 import { DataCard } from './DataCard.tsx';
 
 const columns: GridColDef[] = [
