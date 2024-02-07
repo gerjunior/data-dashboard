@@ -1,6 +1,10 @@
+import { Main } from './views/Main/Main'
+
 function App() {
   return (
-    <div>Hello, World!</div>
+    <>
+      <Main/>
+    </>
   )
 }
 
