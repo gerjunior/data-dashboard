@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-import { Main } from './views/Main/Main';
+import { Dashboard } from './pages/Dashboard/Dashboard';
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route index path='/' element={<Main />} />
+          <Route index path='/' element={<Dashboard />} />
           <Route path='*' element={<Navigate to='/' replace />} />
         </Routes>
       </BrowserRouter>
