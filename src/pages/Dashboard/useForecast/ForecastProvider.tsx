@@ -23,6 +23,9 @@ type ForecastContextType = {
   data?: {
     forecast: {
       valid_date: string;
+      u_date: string;
+      u_max_temp: number;
+      u_min_temp: number;
       max_temp: string;
       min_temp: string;
       moon_phase_description: string;
@@ -63,6 +66,12 @@ export const ForecastProvider: FC<ForecastProviderProps> = ({ children }) => {
     data?.data.map((item) => ({
       valid_date: new Date(item.valid_date).toLocaleDateString(),
       weather: item.weather.description,
+      u_date: Intl.DateTimeFormat('en-US', {
+        month: 'short',
+        day: 'numeric',
+      }).format(new Date(item.valid_date)),
+      u_max_temp: item.max_temp,
+      u_min_temp: item.min_temp,
       max_temp: `${item.max_temp}° C`,
       min_temp: `${item.min_temp}° C`,
       ...(() => {

@@ -1,8 +1,9 @@
 import { v4 as uuidV4 } from 'uuid';
 import { Box, Card } from '@mui/material';
 import { DataGrid, type GridColDef, GridToolbar } from '@mui/x-data-grid';
-import { useForecast } from './useForecast/useForecast.tsx';
+import { useForecast } from './useForecast/useForecast.ts';
 import { DataCard } from './DataCard.tsx';
+import { Chart } from './Chart.tsx';
 
 const columns: GridColDef[] = [
   {
@@ -72,38 +73,47 @@ export const Content = () => {
           <DataCard card={data?.state_code} />
         </Box>
 
-        <Card
+        <Box
           sx={{
             height: '75vh',
             width: '80vw',
-            borderRadius: '20px',
-            padding: '10px',
+            display: 'flex',
+            flexDirection: 'row',
           }}
         >
-          <DataGrid
-            initialState={{
-              filter: {
-                filterModel: {
-                  items: [],
-                  quickFilterValues: ['weather'],
+          <Card
+            sx={{
+              width: '50vw',
+              borderRadius: '20px',
+              padding: '10px',
+            }}
+          >
+            <DataGrid
+              initialState={{
+                filter: {
+                  filterModel: {
+                    items: [],
+                    quickFilterValues: ['weather'],
+                  },
                 },
-              },
-            }}
-            getRowId={() => uuidV4()}
-            rows={data?.forecast || []}
-            columns={columns}
-            disableColumnSelector
-            disableRowSelectionOnClick
-            isCellEditable={() => false}
-            pageSizeOptions={[20]}
-            slots={{ toolbar: GridToolbar }}
-            slotProps={{
-              toolbar: {
-                showQuickFilter: true,
-              },
-            }}
-          />
-        </Card>
+              }}
+              getRowId={() => uuidV4()}
+              rows={data?.forecast || []}
+              columns={columns}
+              disableColumnSelector
+              disableRowSelectionOnClick
+              isCellEditable={() => false}
+              pageSizeOptions={[20]}
+              slots={{ toolbar: GridToolbar }}
+              slotProps={{
+                toolbar: {
+                  showQuickFilter: true,
+                },
+              }}
+            />
+          </Card>
+          <Chart />
+        </Box>
       </Box>
     </Box>
   );
