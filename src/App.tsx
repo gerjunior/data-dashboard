@@ -1,11 +1,11 @@
-import { Main } from './views/Main/Main'
+import { Main } from './views/Main/Main';
 
 function App() {
   return (
     <>
-      <Main/>
+      <Main />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
