@@ -21,7 +21,7 @@ type WeatherbitResponse = {
   state_code: string;
 };
 
-type ForecastContextType = {
+export type ForecastContextType = {
   data?: {
     forecast: {
       id: string;
@@ -114,6 +114,8 @@ export const ForecastProvider: FC<ForecastProviderProps> = ({ children }) => {
         forecast,
       }
     : undefined;
+
+  sessionStorage.setItem('forecastData', JSON.stringify(parsedData));
 
   const value = {
     data: parsedData,

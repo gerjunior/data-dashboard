@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import { ForecastProvider } from './useForecast/ForecastProvider.tsx';
-import { Header } from './Header.tsx';
+import { Header } from '../../views/Header.tsx';
 import { Content } from './Content.tsx';
 
 export const Dashboard = () => {

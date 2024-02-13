@@ -8,13 +8,14 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import { redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useForecast } from './useForecast/useForecast.ts';
 import { DataCard } from './DataCard.tsx';
 import { Chart } from './Chart.tsx';
 
 export const Content = () => {
   const { data } = useForecast();
+  const navigate = useNavigate();
 
   return (
     <Box
@@ -78,7 +79,7 @@ export const Content = () => {
                   {data?.forecast.map((row) => (
                     <TableRow
                       key={row.id}
-                      onClick={() => redirect(`/details/${row.id}`)}
+                      onClick={() => navigate(`/details/${row.id}`)}
                     >
                       <TableCell>{row.valid_date}</TableCell>
                       <TableCell>{row.max_temp}</TableCell>

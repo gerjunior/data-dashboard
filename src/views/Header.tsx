@@ -1,4 +1,5 @@
 import { Box, Stack, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const menus = [
   {
@@ -42,17 +43,25 @@ export const Header = () => {
         </Typography>
         {menus.map((menu) => {
           return (
-            <Typography
+            <Link
+              to={menu.path}
               key={menu.name}
-              sx={{
-                minWidth: 100,
-                fontWeight: 'bold',
-                fontSize: '1.5em',
-                padding: '20px 0',
+              style={{
+                textDecoration: 'none',
               }}
             >
-              {menu.name}
-            </Typography>
+              <Typography
+                key={menu.name}
+                sx={{
+                  minWidth: 100,
+                  fontWeight: 'bold',
+                  fontSize: '1.5em',
+                  padding: '20px 0',
+                }}
+              >
+                {menu.name}
+              </Typography>
+            </Link>
           );
         })}
       </Stack>
