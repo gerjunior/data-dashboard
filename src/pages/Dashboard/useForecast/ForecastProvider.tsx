@@ -1,5 +1,7 @@
 import { createContext, FC, ReactNode } from 'react';
 import useSWR from 'swr';
+import { v4 as uuidV4 } from 'uuid';
+import { mockData } from './mockData';
 
 const BASE_URL = 'https://api.weatherbit.io/v2.0/forecast/daily';
 
@@ -55,15 +57,21 @@ const fetcher = async ({ city, state }: { city: string; state: string }) => {
 };
 
 export const ForecastProvider: FC<ForecastProviderProps> = ({ children }) => {
-  const { data, error, isLoading } = useSWR<WeatherbitResponse>(BASE_URL, () =>
-    fetcher({
-      city: 'New York',
-      state: 'NY',
-    }),
+  const { data, error, isLoading } = useSWR<WeatherbitResponse>(
+    BASE_URL,
+    () =>
+      fetcher({
+        city: 'New York',
+        state: 'NY',
+      }),
+    {
+      revalidateIfStale: false,
+    },
   );
 
   const forecast =
     data?.data.map((item) => ({
+      id: uuidV4(),
       valid_date: new Date(item.valid_date).toLocaleDateString(),
       weather: item.weather.description,
       u_date: Intl.DateTimeFormat('en-US', {
@@ -106,8 +114,19 @@ export const ForecastProvider: FC<ForecastProviderProps> = ({ children }) => {
       }
     : undefined;
 
+  const value = {
+    data: parsedData,
+    error,
+    isLoading,
+  };
+
+  if (error?.message.includes('Unexpected end of JSON input')) {
+    value.data = mockData;
+    value.error = undefined;
+  }
+
   return (
-    <ForecastContext.Provider value={{ data: parsedData, error, isLoading }}>
+    <ForecastContext.Provider value={value}>
       {children}
     </ForecastContext.Provider>
   );

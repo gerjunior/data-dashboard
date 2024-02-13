@@ -1,4 +1,3 @@
-import { v4 as uuidV4 } from 'uuid';
 import { Box, Card } from '@mui/material';
 import { DataGrid, type GridColDef, GridToolbar } from '@mui/x-data-grid';
 import { useForecast } from './useForecast/useForecast.ts';
@@ -93,11 +92,12 @@ export const Content = () => {
                 filter: {
                   filterModel: {
                     items: [],
-                    quickFilterValues: ['weather'],
                   },
                 },
               }}
-              getRowId={() => uuidV4()}
+              onRowClick={(row) => {
+                console.log(row);
+              }}
               rows={data?.forecast || []}
               columns={columns}
               disableColumnSelector
