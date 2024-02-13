@@ -24,6 +24,7 @@ type WeatherbitResponse = {
 type ForecastContextType = {
   data?: {
     forecast: {
+      id: string;
       valid_date: string;
       u_date: string;
       u_max_temp: number;
